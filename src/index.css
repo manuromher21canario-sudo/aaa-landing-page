@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-cyan: #00F2FF;
+  --color-lime-green: #BFFF00;
+  --color-dark-bg: #050505;
+  --color-card-bg: rgba(13, 13, 13, 0.7);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-pulse-slow: pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-grid-fade: grid-fade 20s linear infinite;
+
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px rgba(0, 242, 255, 0.2), 0 0 20px rgba(0, 242, 255, 0.2);
+    }
+    to {
+      text-shadow: 0 0 20px rgba(0, 242, 255, 0.6), 0 0 30px rgba(0, 242, 255, 0.4);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.15;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes grid-fade {
+    0% {
+      background-position: 0px 0px;
+    }
+    100% {
+      background-position: 0px 100px;
+    }
+  }
+}
+
+/* Custom Base / Global Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-dark-bg);
+    color: #F3F4F6;
+    font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    background-color: var(--color-dark-bg);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Custom styling for native HTML Dialog Backdrop */
+  dialog::backdrop {
+    background-color: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(12px);
+    transition: opacity 0.3s ease;
+  }
+}
+
+/* Custom classes */
+.glassmorphism {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+.text-glow-lime {
+  text-shadow: 0 0 15px rgba(191, 255, 0, 0.5);
+}
+
+.border-glow-hover:hover {
+  border-color: rgba(0, 242, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
+}
+
+/* Animated Grid Background */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
