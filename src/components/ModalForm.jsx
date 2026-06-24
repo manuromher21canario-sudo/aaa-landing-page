@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { sendLeadToN8N } from '../utils/api';
+import config from '../config'; // Importamos tu archivo de configuración directamente
 
 export default function ModalForm({ isOpen, onClose }) {
   const [formData, setFormData] = useState({ name: '', email: '', service: '', problem: '' });
@@ -10,16 +10,34 @@ export default function ModalForm({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    const result = await sendLeadToN8N(formData);
-    
-    if (result.success) {
+
+    try {
+      // Realiza la petición directamente a la URL que tienes configurada en config.js
+      const response = await fetch(config.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          fecha_registro: new Date().toISOString(), // Esto añade la fecha y hora del envío automáticamente
+          origen: 'Nexus Auto Web'
+        }),
+      });
+
+      if (!response.ok) throw new Error('Error en la respuesta del servidor n8n');
+
       setStatus('success');
+      
+      // Limpia el formulario y lo cierra a los 2 segundos de tener éxito
       setTimeout(() => {
         setStatus('idle');
         setFormData({ name: '', email: '', service: '', problem: '' });
         onClose();
       }, 2000);
-    } else {
+
+    } catch (error) {
+      console.error('Error crítico al conectar con n8n:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 3000);
     }
@@ -29,6 +47,7 @@ export default function ModalForm({ isOpen, onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
       <div className="bg-[#0f0f11] border border-white/10 p-8 rounded-2xl w-full max-w-md relative shadow-2xl">
         
+        {/* Botón de cerrar (X) */}
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-white cursor-pointer">
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -89,7 +108,7 @@ export default function ModalForm({ isOpen, onClose }) {
             </button>
             
             {status === 'error' && (
-              <p className="text-red-400 text-sm text-center mt-2">Error de red. Revisa tu conexión.</p>
+              <p className="text-red-400 text-sm text-center mt-2">Error de conexión. Asegúrate de tener n8n encendido en la terminal.</p>
             )}
           </form>
         )}
