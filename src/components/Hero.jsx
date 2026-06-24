@@ -1,69 +1,76 @@
 import React from 'react';
 
-export default function Hero({ onOpenModal }) {
+export default function Services({ onOpenModal }) {
+  const servicesList = [
+    {
+      title: 'Formularios Inteligentes',
+      tag: 'Captación Automática',
+      description: 'Formularios web que clasifican y guardan los datos de tus leads automáticamente en tu hoja de cálculo o CRM.',
+      bullets: [
+        'Registro automático en Google Sheets',
+        'Filtro de leads mediante Inteligencia Artificial',
+        'Notificación instantánea en Telegram'
+      ],
+      icon: (
+        <svg className="w-8 h-8 text-neon-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
+      glowClass: 'group-hover:border-neon-cyan/40 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]'
+    },
+    {
+      title: 'Agendador de Citas 24/7',
+      tag: 'Agenda Automatizada',
+      description: 'Olvídate de los emails para cuadrar horas. Tus clientes reservan en tu calendario y el sistema confirma todo solo.',
+      bullets: [
+        'Integración con Google Calendar',
+        'Confirmación automática al cliente',
+        'Recordatorios antes de la cita'
+      ],
+      icon: (
+        <svg className="w-8 h-8 text-lime-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
+      glowClass: 'group-hover:border-lime-green/40 group-hover:shadow-[0_0_30px_rgba(191,255,0,0.1)]'
+    },
+    {
+      title: 'Bots de Gestión IA',
+      tag: 'Atención Inteligente',
+      description: 'Asistentes virtuales que responden dudas frecuentes y notifican problemas graves sin que muevas un dedo.',
+      bullets: [
+        'Respuestas automáticas basadas en IA',
+        'Clasificación de incidencias urgentes',
+        'Conexión directa a Telegram o WhatsApp'
+      ],
+      icon: (
+        <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+      ),
+      glowClass: 'group-hover:border-white/20 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]'
+    }
+  ];
+
   return (
-    <section className="relative w-full min-h-[85vh] flex flex-col items-center justify-center text-center px-6 md:px-12 py-20 overflow-hidden">
-      {/* Background Decorative Neon Glows */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-72 md:w-96 h-72 md:h-96 rounded-full bg-neon-cyan/25 blur-[80px] md:blur-[120px] animate-pulse-slow pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-72 md:w-96 h-72 md:h-96 rounded-full bg-lime-green/20 blur-[80px] md:blur-[120px] animate-pulse-slow pointer-events-none" />
-
-      {/* Main Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto space-y-8 flex flex-col items-center">
-        {/* Elite Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glassmorphism border border-white/10 text-xs font-semibold uppercase tracking-wider text-gray-300">
-          <span className="h-2 w-2 rounded-full bg-neon-cyan animate-ping" />
-          <span>Agencia de Automatización Inteligente (AAA)</span>
+    <section id="services" className="w-full py-24 px-6 bg-[#050505]">
+      <div className="max-w-6xl mx-auto space-y-16">
+        <div className="text-center space-y-4">
+          <h2 className="text-neon-cyan font-bold uppercase tracking-widest">Nuestros Servicios</h2>
+          <h3 className="text-4xl md:text-5xl font-extrabold text-white">Sistemas que trabajan por ti</h3>
         </div>
-
-        {/* Impact Title */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.1] text-white">
-          Automatiza tu Operación.<br />
-          <span className="bg-gradient-to-r from-neon-cyan via-white to-lime-green bg-clip-text text-transparent text-glow-cyan">
-            Escala sin Límites.
-          </span>
-        </h1>
-
-        {/* Value Subtitle */}
-        <p className="max-w-2xl text-base sm:text-lg md:text-xl text-gray-400 font-light leading-relaxed">
-          Diseñamos flujos con <strong className="text-white font-medium">n8n</strong>, bots interactivos de gestión y web apps ultra-rápidas para eliminar tareas repetitivas y multiplicar la rentabilidad de tu negocio.
-        </p>
-
-        {/* CTA Button and trust indicators */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-4">
-          <button
-            onClick={onOpenModal}
-            className="group relative px-8 py-4 font-bold text-black rounded-xl bg-gradient-to-r from-neon-cyan to-lime-green overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,242,255,0.4)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-          >
-            <span className="flex items-center gap-2">
-              Auditar Mi Negocio
-              <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </button>
-          
-          <a
-            href="#services"
-            className="px-8 py-4 font-semibold text-gray-300 hover:text-white transition-colors duration-200"
-          >
-            Ver Servicios &darr;
-          </a>
-        </div>
-
-        {/* Simple Trust Section / Stats */}
-        <div className="grid grid-cols-3 gap-4 md:gap-12 pt-16 w-full border-t border-white/5">
-          <div className="text-center space-y-1">
-            <p className="text-2xl md:text-3xl font-extrabold text-neon-cyan">+30h</p>
-            <p className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500">Ahorradas Semanales</p>
-          </div>
-          <div className="text-center space-y-1">
-            <p className="text-2xl md:text-3xl font-extrabold text-white">100%</p>
-            <p className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500">Sistemas Autónomos</p>
-          </div>
-          <div className="text-center space-y-1">
-            <p className="text-2xl md:text-3xl font-extrabold text-lime-green">Zero</p>
-            <p className="text-[10px] md:text-xs uppercase tracking-wider text-gray-500">Errores Humanos</p>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {servicesList.map((service, index) => (
+            <div key={index} className={`p-8 rounded-2xl bg-[#0d0d0d] border border-white/5 transition-all ${service.glowClass}`}>
+              <div className="mb-6">{service.icon}</div>
+              <h4 className="text-xl font-bold text-white mb-2">{service.title}</h4>
+              <p className="text-gray-400 text-sm mb-6">{service.description}</p>
+              <ul className="space-y-2 mb-8">
+                {service.bullets.map((b, i) => <li key={i} className="text-xs text-gray-500">• {b}</li>)}
+              </ul>
+              <button onClick={onOpenModal} className="text-sm font-bold text-neon-cyan cursor-pointer">Solicitar esta solución →</button>
+            </div>
+          ))}
         </div>
       </div>
     </section>
